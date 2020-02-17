@@ -4,6 +4,7 @@ import { MdAddShoppingCart } from 'react-icons/md';
 import { ProductList } from './styles';
 
 import api from '../../services/api';
+import { formatPrice } from '../../utils/format';
 
 export default function Home() {
   const [products, setProducts] = useState([]);
@@ -12,7 +13,11 @@ export default function Home() {
     async function loadProducts() {
       const response = await api.get('/products');
 
-      setProducts(response.data);
+      const data = response.data.map(p => ({
+        ...p,
+        priceFormatted: formatPrice(p.price),
+      }));
+      setProducts(data);
     }
     loadProducts();
   }, []);
@@ -23,7 +28,7 @@ export default function Home() {
         <li key={product.id}>
           <img src={product.image} alt={product.title} />
           <strong>{product.title}</strong>
-          <span>{product.price}</span>
+          <span>{product.priceFormatted}</span>
 
           <button>
             <div>
