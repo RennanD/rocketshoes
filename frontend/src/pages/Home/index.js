@@ -14,8 +14,8 @@ export default function Home() {
 
   const dispatch = useDispatch();
 
-  function handleAddToCart() {
-    dispatch(addToCartRequest());
+  function handleAddToCart(product) {
+    dispatch(addToCartRequest(product));
   }
 
   useEffect(() => {
@@ -39,7 +39,7 @@ export default function Home() {
           <strong>{product.title}</strong>
           <span>{product.priceFormatted}</span>
 
-          <button type="button" onClick={handleAddToCart}>
+          <button type="button" onClick={() => handleAddToCart(product)}>
             <div>
               <MdAddShoppingCart size={20} color="#fff" /> 3
             </div>
