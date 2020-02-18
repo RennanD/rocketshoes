@@ -11,3 +11,10 @@ export function removeFromCart(id) {
     payload: { id },
   };
 }
+
+export function updateAmount(id, amount) {
+  return {
+    type: '@cart/UPDATE',
+    payload: { id, amount },
+  };
+}

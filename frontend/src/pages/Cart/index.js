@@ -8,7 +8,7 @@ import {
 
 import { Container, ProductTable, Total } from './styles';
 
-import { removeFromCart } from '../../store/modules/cart/actions';
+import { removeFromCart, updateAmount } from '../../store/modules/cart/actions';
 
 export default function Cart() {
   const cart = useSelector(state => state.cart);
@@ -17,6 +17,14 @@ export default function Cart() {
 
   function handleRemoveFromCart(id) {
     dispatch(removeFromCart(id));
+  }
+
+  function increment(product) {
+    dispatch(updateAmount(product.id, product.amount + 1));
+  }
+
+  function decrement(product) {
+    dispatch(updateAmount(product.id, product.amount - 1));
   }
 
   return (
@@ -43,11 +51,11 @@ export default function Cart() {
               </td>
               <td>
                 <div>
-                  <button type="button">
+                  <button type="button" onClick={() => decrement(product)}>
                     <MdRemoveCircleOutline size={20} color="#7159c1" />
                   </button>
                   <input type="number" readOnly value={product.amount} />
-                  <button>
+                  <button type="button" onClick={() => increment(product)}>
                     <MdAddCircleOutline size={20} color="#7159c1" />
                   </button>
                 </div>
