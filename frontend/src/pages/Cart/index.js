@@ -10,7 +10,10 @@ import { Container, ProductTable, Total } from './styles';
 
 import { formatPrice } from '../../utils/format';
 
-import { removeFromCart, updateAmount } from '../../store/modules/cart/actions';
+import {
+  removeFromCart,
+  updateAmountRequest,
+} from '../../store/modules/cart/actions';
 
 export default function Cart() {
   const cart = useSelector(state =>
@@ -35,11 +38,11 @@ export default function Cart() {
   }
 
   function increment(product) {
-    dispatch(updateAmount(product.id, product.amount + 1));
+    dispatch(updateAmountRequest(product.id, product.amount + 1));
   }
 
   function decrement(product) {
-    dispatch(updateAmount(product.id, product.amount - 1));
+    dispatch(updateAmountRequest(product.id, product.amount - 1));
   }
 
   return (
