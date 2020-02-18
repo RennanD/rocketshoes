@@ -24,7 +24,7 @@ export default function Cart() {
           </tr>
         </thead>
         <tbody>
-          {cart.map(({ product, amount }) => (
+          {cart.map(product => (
             <tr>
               <td>
                 <img src={product.image} alt={product.title} />
@@ -38,7 +38,7 @@ export default function Cart() {
                   <button type="button">
                     <MdRemoveCircleOutline size={20} color="#7159c1" />
                   </button>
-                  <input type="number" readOnly value={amount} />
+                  <input type="number" readOnly value={product.amount} />
                   <button>
                     <MdAddCircleOutline size={20} color="#7159c1" />
                   </button>
