@@ -66,4 +66,11 @@ export const ProductList = styled.ul`
       }
     }
   }
+
+  @media (max-width: 700px) {
+    & {
+      grid-template-columns: 1fr;
+      padding: 20px 30px;
+    }
+  }
 `;

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import { MdAddShoppingCart } from 'react-icons/md';
 
 import { ProductList } from './styles';
@@ -6,8 +7,16 @@ import { ProductList } from './styles';
 import api from '../../services/api';
 import { formatPrice } from '../../utils/format';
 
+import { addToCartRequest } from '../../store/modules/cart/actions';
+
 export default function Home() {
   const [products, setProducts] = useState([]);
+
+  const dispatch = useDispatch();
+
+  function handleAddToCart() {
+    dispatch(addToCartRequest());
+  }
 
   useEffect(() => {
     async function loadProducts() {
@@ -30,7 +39,7 @@ export default function Home() {
           <strong>{product.title}</strong>
           <span>{product.priceFormatted}</span>
 
-          <button>
+          <button type="button" onClick={handleAddToCart}>
             <div>
               <MdAddShoppingCart size={20} color="#fff" /> 3
             </div>
