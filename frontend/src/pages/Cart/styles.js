@@ -86,6 +86,7 @@ export const Total = styled.div`
   span {
     color: #999;
     font-weight: bold;
+    margin-right: 5px;
   }
 
   strong {

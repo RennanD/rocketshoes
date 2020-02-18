@@ -8,10 +8,25 @@ import {
 
 import { Container, ProductTable, Total } from './styles';
 
+import { formatPrice } from '../../utils/format';
+
 import { removeFromCart, updateAmount } from '../../store/modules/cart/actions';
 
 export default function Cart() {
-  const cart = useSelector(state => state.cart);
+  const cart = useSelector(state =>
+    state.cart.map(p => ({
+      ...p,
+      subtotal: formatPrice(p.price * p.amount),
+    }))
+  );
+
+  const total = useSelector(state =>
+    formatPrice(
+      state.cart.reduce((total, prodcut) => {
+        return total + prodcut.price * prodcut.amount;
+      }, 0)
+    )
+  );
 
   const dispatch = useDispatch();
 
@@ -61,7 +76,7 @@ export default function Cart() {
                 </div>
               </td>
               <td>
-                <strong>R$232,00</strong>
+                <strong>{product.subtotal}</strong>
               </td>
               <td>
                 <button
@@ -80,7 +95,7 @@ export default function Cart() {
         <button type="button">Finalizar pedido</button>
         <Total>
           <span>TOTAL</span>
-          <strong>R$1920,00</strong>
+          <strong>{total}</strong>
         </Total>
       </footer>
     </Container>
