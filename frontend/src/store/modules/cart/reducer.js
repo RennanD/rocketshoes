@@ -5,7 +5,7 @@ const INITIAL_STATE = [];
 export default function cart(state = INITIAL_STATE, action) {
   return produce(state, draft => {
     switch (action.type) {
-      case '@cart/ADD_REQUEST': {
+      case '@cart/ADD_SUCCESS': {
         const productIndex = draft.findIndex(
           p => p.id === action.payload.product.id
         );

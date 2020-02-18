@@ -38,12 +38,13 @@ export const BadgeView = styled.div`
 export const Badge = styled.div`
   position: absolute;
   font-size: 11px;
-  top: -7px;
+  font-weight: bold;
+  top: -6px;
   right: -14px;
   padding: 2px 5px;
   border-radius: 50%;
   background: #7159c1;
-  border: 3px solid #000;
+  border: 2px solid #141419;
   color: white;
   transition: 0.2s;
 `;
