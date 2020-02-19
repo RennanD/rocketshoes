@@ -5,8 +5,16 @@ import Home from "./screens/Home";
 import Cart from "./screens/Cart";
 
 export default createAppContainer(
-  createStackNavigator({
-    Home,
-    Cart
-  })
+  createStackNavigator(
+    {
+      Home,
+      Cart
+    },
+    {
+      defaultNavigationOptions: {
+        headerTransparent: true,
+        headerTitle: ""
+      }
+    }
+  )
 );
