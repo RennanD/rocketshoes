@@ -17,7 +17,7 @@ import Header from "../../components/Header";
 
 import api from "../../services/api";
 
-export default function Home() {
+export default function Home({ navigation }) {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
@@ -32,7 +32,7 @@ export default function Home() {
   return (
     <Background>
       <Container>
-        <Header />
+        <Header navigation={navigation} />
         <ProductList
           data={products}
           keyExtractor={product => String(product.id)}

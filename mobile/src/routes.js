@@ -13,7 +13,8 @@ export default createAppContainer(
     {
       defaultNavigationOptions: {
         headerTransparent: true,
-        headerTitle: ""
+        headerTitle: "",
+        headerLeft: false
       }
     }
   )
