@@ -6,21 +6,37 @@ export const Container = styled.SafeAreaView`
 
 export const CartView = styled.View`
   padding: 20px;
-  height: 350px;
+  max-height: 500px;
   background: #fff;
   border-radius: 10px;
   margin: 20px 30px;
 `;
 
-export const CartList = styled.FlatList.attrs({
-  showsVerticalScroolIndicator: false,
-})`
-  flex: 1;
+export const Empty = styled.View`
+  padding: 20px;
+  align-self: stretch;
+  align-items: center;
+  justify-content: center;
 `;
 
+export const EmptyText = styled.Text`
+  font-size: 28px;
+  font-weight: bold;
+  color: #333;
+  text-align: center;
+  margin-top: 10px;
+`;
+
+export const CartList = styled.FlatList.attrs({
+  showsVerticalScrollIndicator: false,
+})``;
 export const ProductView = styled.View`
   flex-direction: row;
   align-items: center;
+  border-bottom-width: 1px;
+  border-color: #eee;
+  border-style: solid;
+  margin-bottom: 10px;
 `;
 
 export const Thumbnail = styled.Image`
@@ -30,7 +46,7 @@ export const Thumbnail = styled.Image`
 
 export const InfoView = styled.View`
   flex: 1;
-  margin: 0 7px;
+  margin: 0 15px;
 `;
 
 export const Title = styled.Text`
@@ -47,8 +63,7 @@ export const Price = styled.Text`
 `;
 
 export const Footer = styled.View`
-  flex: 1;
-  max-height: 150px;
+  padding: 20px 0;
 `;
 
 export const TotalLabel = styled.Text`

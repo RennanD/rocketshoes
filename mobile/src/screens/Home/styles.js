@@ -1,4 +1,4 @@
-import styled from "styled-components/native";
+import styled from 'styled-components/native';
 
 export const Container = styled.SafeAreaView`
   flex: 1;
@@ -6,9 +6,9 @@ export const Container = styled.SafeAreaView`
 
 export const ProductList = styled.FlatList.attrs({
   contentContainerStyle: {
-    padding: 20
+    padding: 20,
   },
-  showsVerticalScrollIndicator: false
+  showsVerticalScrollIndicator: false,
 })``;
 
 export const Card = styled.View`
@@ -44,12 +44,29 @@ export const Button = styled.TouchableOpacity`
   border-radius: 4px;
   background: #7159c1;
   align-items: center;
-  justify-content: center;
   margin-top: 10px;
+  flex-direction: row;
 `;
 
 export const ButtonText = styled.Text`
-  font-size: 16px;
+  font-size: 18px;
   font-weight: bold;
   color: #fff;
+  flex: 1;
+  text-align: center;
+`;
+
+export const AmoutView = styled.View`
+  height: 46px;
+  padding: 12px;
+  flex-direction: row;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.1);
+`;
+
+export const Amout = styled.Text`
+  font-size: 14px;
+  margin-left: 5px;
+  color: #fff;
+  font-weight: 600;
 `;

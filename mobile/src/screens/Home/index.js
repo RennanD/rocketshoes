@@ -1,4 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import {
   Container,
@@ -8,23 +11,44 @@ import {
   Price,
   Button,
   ButtonText,
-  Card
-} from "./styles";
+  Card,
+  AmoutView,
+  Amout,
+} from './styles';
 
-import Background from "../../components/Background";
+import Background from '../../components/Background';
 
-import Header from "../../components/Header";
+import Header from '../../components/Header';
 
-import api from "../../services/api";
+import api from '../../services/api';
+
+import { formatPrice } from '../../utils/format';
+
+import { addToCartRequest } from '../../store/modules/cart/actions';
 
 export default function Home({ navigation }) {
   const [products, setProducts] = useState([]);
 
+  const dispatch = useDispatch();
+
+  const amount = useSelector(state =>
+    state.cart.reduce((sumAmount, product) => {
+      sumAmount[product.id] = product.amount;
+
+      return sumAmount;
+    }, {})
+  );
+
   useEffect(() => {
     async function loadProducts() {
-      const response = await api.get("/products");
+      const response = await api.get('/products');
 
-      setProducts(response.data);
+      const data = response.data.map(p => ({
+        ...p,
+        priceFormatted: formatPrice(p.price),
+      }));
+
+      setProducts(data);
     }
     loadProducts();
   }, []);
@@ -40,8 +64,12 @@ export default function Home({ navigation }) {
             <Card>
               <ProductImage source={{ uri: item.image }} />
               <Title>{item.title}</Title>
-              <Price>{item.price}</Price>
-              <Button>
+              <Price>{item.priceFormatted}</Price>
+              <Button onPress={() => dispatch(addToCartRequest(item.id))}>
+                <AmoutView>
+                  <Icon name="add-shopping-cart" size={20} color="#fff" />
+                  <Amout>{amount[item.id] || 0}</Amout>
+                </AmoutView>
                 <ButtonText>Adicionar ao carrinho</ButtonText>
               </Button>
             </Card>
