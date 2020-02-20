@@ -6,7 +6,7 @@ export const Container = styled.SafeAreaView`
 
 export const CartView = styled.View`
   padding: 20px;
-  max-height: 500px;
+  max-height: 700px;
   background: #fff;
   border-radius: 10px;
   margin: 20px 30px;

@@ -1,5 +1,8 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { TouchableOpacity } from 'react-native';
+
+import { useSelector, useDispatch } from 'react-redux';
+
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import {
@@ -22,9 +25,13 @@ import Background from '../../components/Background';
 
 import Header from '../../components/Header';
 
+import { removeFromCart } from '../../store/modules/cart/actions';
+
 export default function Cart({ navigation }) {
   const cart = useSelector(state => state.cart);
   const cartSize = useSelector(state => state.cart.length);
+
+  const dispatch = useDispatch();
 
   return (
     <Background>
@@ -49,7 +56,11 @@ export default function Cart({ navigation }) {
                     <Title>{item.title}</Title>
                     <Price>{item.priceFormatted}</Price>
                   </InfoView>
-                  <Icon name="delete-forever" size={24} color="#7159c1" />
+                  <TouchableOpacity
+                    onPress={() => dispatch(removeFromCart(item.id))}
+                  >
+                    <Icon name="delete-forever" size={24} color="#7159c1" />
+                  </TouchableOpacity>
                 </ProductView>
               )}
             />
