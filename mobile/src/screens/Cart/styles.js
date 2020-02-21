@@ -33,10 +33,6 @@ export const CartList = styled.FlatList.attrs({
 export const ProductView = styled.View`
   flex-direction: row;
   align-items: center;
-  border-bottom-width: 1px;
-  border-color: #eee;
-  border-style: solid;
-  margin-bottom: 10px;
 `;
 
 export const Thumbnail = styled.Image`
@@ -50,7 +46,7 @@ export const InfoView = styled.View`
 `;
 
 export const Title = styled.Text`
-  font-size: 14px;
+  font-size: 16px;
   color: #333;
   font-weight: 600;
   margin-bottom: 5px;
@@ -60,6 +56,40 @@ export const Price = styled.Text`
   font-size: 18px;
   color: #000;
   font-weight: bold;
+`;
+
+export const SubtotalView = styled.View`
+  padding: 7px;
+  flex-direction: row;
+  justify-content: space-between;
+  border-radius: 4px;
+  background: #eee;
+  align-items: center;
+`;
+
+export const ActionView = styled.View`
+  flex-direction: row;
+  align-items: center;
+`;
+
+export const AmountProduct = styled.TextInput`
+  padding: 4px;
+  width: 50px;
+  border-radius: 4px;
+  background: #fff;
+  margin: 0 5px;
+`;
+
+export const Subtotal = styled.Text`
+  font-size: 15px;
+  font-weight: bold;
+`;
+
+export const Hr = styled.View`
+  border-color: #ddd;
+  border-style: solid;
+  border-bottom-width: 1px;
+  margin: 15px 0;
 `;
 
 export const Footer = styled.View`
