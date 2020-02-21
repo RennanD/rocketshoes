@@ -1,5 +1,7 @@
 import styled from 'styled-components/native';
 
+import ShimmerPlaceHolder from 'react-native-shimmer-placeholder';
+
 export const Container = styled.SafeAreaView`
   flex: 1;
 `;
@@ -16,7 +18,31 @@ export const Card = styled.View`
   margin: 0 10px;
   border-radius: 10px;
   background: #fff;
+  opacity: ${props => (props.loading ? 0.8 : 1)};
   margin-bottom: 20px;
+`;
+
+export const ShimmerCard = styled.View`
+  padding: 20px;
+`;
+
+export const ShimmerImage = styled(ShimmerPlaceHolder)`
+  height: 220px;
+  width: 100%;
+  border-radius: 4px;
+`;
+
+export const ShimmerTitle = styled(ShimmerPlaceHolder)`
+  height: 20px;
+  width: 200px;
+  border-radius: 6px;
+  margin: 20px 0;
+`;
+
+export const ShimmerPrice = styled(ShimmerPlaceHolder)`
+  height: 30px;
+  width: 120px;
+  border-radius: 6px;
 `;
 
 export const ProductImage = styled.Image`

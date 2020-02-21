@@ -1,5 +1,6 @@
-import { Alert } from 'react-native';
 import { call, put, all, takeLatest, select } from 'redux-saga/effects';
+
+import SnackBar from 'react-native-snackbar';
 
 import api from '../../../services/api';
 import { addToCartSuccess, updateAmountSuccess } from './actions';
@@ -20,7 +21,11 @@ export function* addToCart({ payload }) {
   const amount = currentAmount + 1;
 
   if (amount > stockAmount) {
-    Alert.alert('Erro', 'Quantidade de estoque insuficiente.');
+    SnackBar.show({
+      text: 'Produto fora de estoque.',
+      duration: SnackBar.LENGTH_LONG,
+      backgroundColor: 'red',
+    });
     return;
   }
 
@@ -36,6 +41,11 @@ export function* addToCart({ payload }) {
     };
 
     yield put(addToCartSuccess(data));
+    SnackBar.show({
+      text: 'Produto adicionado ao carrinho.',
+      duration: SnackBar.LENGTH_SHORT,
+      backgroundColor: 'green',
+    });
   }
 }
 
@@ -51,8 +61,11 @@ export function* updateAmout({ payload }) {
   const stockAmount = stock.data.amount;
 
   if (amount > stockAmount) {
-    Alert.alert('Erro', 'Quantidade de estoque insuficiente.');
-
+    SnackBar.show({
+      text: 'Produto fora de estoque.',
+      duration: SnackBar.LENGTH_LONG,
+      backgroundColor: 'red',
+    });
     return;
   }
 

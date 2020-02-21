@@ -14,6 +14,10 @@ import {
   Card,
   AmoutView,
   Amout,
+  ShimmerCard,
+  ShimmerImage,
+  ShimmerTitle,
+  ShimmerPrice,
 } from './styles';
 
 import Background from '../../components/Background';
@@ -28,6 +32,7 @@ import { addToCartRequest } from '../../store/modules/cart/actions';
 
 export default function Home({ navigation }) {
   const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -41,6 +46,7 @@ export default function Home({ navigation }) {
 
   useEffect(() => {
     async function loadProducts() {
+      setLoading(true);
       const response = await api.get('/products');
 
       const data = response.data.map(p => ({
@@ -49,6 +55,7 @@ export default function Home({ navigation }) {
       }));
 
       setProducts(data);
+      setLoading(false);
     }
     loadProducts();
   }, []);
@@ -57,24 +64,43 @@ export default function Home({ navigation }) {
     <Background>
       <Container>
         <Header navigation={navigation} />
-        <ProductList
-          data={products}
-          keyExtractor={product => String(product.id)}
-          renderItem={({ item }) => (
-            <Card>
-              <ProductImage source={{ uri: item.image }} />
-              <Title>{item.title}</Title>
-              <Price>{item.priceFormatted}</Price>
-              <Button onPress={() => dispatch(addToCartRequest(item.id))}>
-                <AmoutView>
-                  <Icon name="add-shopping-cart" size={20} color="#fff" />
-                  <Amout>{amount[item.id] || 0}</Amout>
-                </AmoutView>
-                <ButtonText>Adicionar ao carrinho</ButtonText>
-              </Button>
+        {loading ? (
+          <ShimmerCard>
+            <Card loading={loading}>
+              <ShimmerImage autoRun visible={!loading} />
+              <ShimmerTitle autoRun visible={!loading} />
+              <ShimmerPrice autoRun visible={!loading} />
             </Card>
-          )}
-        />
+
+            <Card loading={loading}>
+              <ShimmerImage autoRun visible={!loading} />
+              <ShimmerTitle autoRun visible={!loading} />
+              <ShimmerPrice autoRun visible={!loading} />
+            </Card>
+          </ShimmerCard>
+        ) : (
+          <ProductList
+            data={products}
+            keyExtractor={product => String(product.id)}
+            renderItem={({ item }) => (
+              <Card loading={loading}>
+                <ProductImage source={{ uri: item.image }} />
+
+                <Title>{item.title}</Title>
+
+                <Price>{item.priceFormatted}</Price>
+
+                <Button onPress={() => dispatch(addToCartRequest(item.id))}>
+                  <AmoutView>
+                    <Icon name="add-shopping-cart" size={20} color="#fff" />
+                    <Amout>{amount[item.id] || 0}</Amout>
+                  </AmoutView>
+                  <ButtonText>Adicionar ao carrinho</ButtonText>
+                </Button>
+              </Card>
+            )}
+          />
+        )}
       </Container>
     </Background>
   );
